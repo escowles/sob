@@ -1,0 +1,10 @@
+<%= render 'previous_next_doc' %>
+
+<% @page_title = t('blacklight.search.show.title', :document_title => document_show_html_title, :application_name => nil).html_safe %>
+<% content_for(:head) { render_link_rel_alternates } %>
+
+<div id="document" class="document <%= render_document_class %>" itemscope  itemtype="<%= @document.itemtype %>">
+  <div id="doc_<%= @document.id.to_s.parameterize %>">
+    <%= render partial: 'tweet', locals: { tweet: @response.docs[0] } %>
+  </div>
+</div>

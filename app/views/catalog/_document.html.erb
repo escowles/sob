@@ -1,0 +1,4 @@
+<% # container for a single doc -%>
+<div class="document <%= render_document_class document %>" itemscope itemtype="<%= document.itemtype %>">
+  <%= render partial: 'tweet', locals: { tweet: document } %>
+</div>

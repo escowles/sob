@@ -1,0 +1,26 @@
+<table>
+  <tr>
+    <td style="padding: 3px;" rowspan="2">
+      <img src="<%= tweet['user_image'].html_safe %>"/>
+    </td>
+    <td style="padding: 3px;">
+      <%= tweet['user_name'].html_safe %>
+      <span style="color: gray;">
+        @<%= tweet['user_id'].html_safe %>
+      </span>
+    </td>
+    <td>
+      <%= tweet['date'].html_safe %>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding: 3px;" colspan="2">
+      <%= tweet['tweet_text'].html_safe %>
+    </td>
+  </tr>
+</table>
+<div><%= (tweet['media'] || []).each do |m| %>
+  <a href="<%= m %>"><img src="<%= m %>" height="100"/></a>
+  <% end %>
+</div>
+<a href="https://twitter.com/<%= tweet['user_id'] %>/status/<%= tweet['id'] %>">view on twitter</a>
