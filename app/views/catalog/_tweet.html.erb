@@ -1,26 +1,39 @@
-<table>
-  <tr>
-    <td style="padding: 3px;" rowspan="2">
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-1">
       <img src="<%= tweet['user_image'].html_safe %>"/>
-    </td>
-    <td style="padding: 3px;">
+    </div>
+    <div class="col-md-3">
       <%= tweet['user_name'].html_safe %>
       <span style="color: gray;">
         @<%= tweet['user_id'].html_safe %>
       </span>
-    </td>
-    <td>
+    </div>
+    <div class="col-md-2">
       <%= tweet['date'].html_safe %>
-    </td>
-  </tr>
-  <tr>
-    <td style="padding: 3px;" colspan="2">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-5">
       <%= tweet['tweet_text'].html_safe %>
-    </td>
-  </tr>
-</table>
-<div><%= (tweet['media'] || []).each do |m| %>
-  <a href="<%= m %>"><img src="<%= m %>" height="100"/></a>
+      <a href="https://twitter.com/<%= tweet['user_id'] %>/status/<%= tweet['id'] %>">
+        <span class="glyphicon glyphicon-new-window"></span>
+      </a>
+    </div>
+  </div>
+
+  <% if tweet['media'] %>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <% tweet['media'].each do |m| %>
+        <div class="col-md-2 well">
+          <a href="<%= m %>"><img src="<%= m %>" class="img-responsive"/></a>
+        </div>
+      <% end %>
+    </div>
   <% end %>
+
 </div>
-<a href="https://twitter.com/<%= tweet['user_id'] %>/status/<%= tweet['id'] %>">view on twitter</a>
