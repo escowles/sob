@@ -1,33 +1,38 @@
-<div class="container">
+<div class="container tweet">
 
   <div class="row">
-    <div class="col-md-1">
-      <img src="<%= tweet['user_image'].html_safe %>"/>
-    </div>
-    <div class="col-md-3">
-      <%= tweet['user_name'].html_safe %>
-      <span style="color: gray;">
-        @<%= tweet['user_id'].html_safe %>
-      </span>
-    </div>
-    <div class="col-md-2">
-      <%= tweet['date'].html_safe %>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-5">
-      <%= tweet['tweet_text'].html_safe %>
-      <a href="https://twitter.com/<%= tweet['user_id'] %>/status/<%= tweet['id'] %>">
-        <span class="glyphicon glyphicon-new-window"></span>
-      </a>
+    <div class="col-md-1 avatar">
+      <img src="<%= tweet['user_image'].html_safe %>" class="img-responsive"/>
     </div>
+
+    <div class="col-md-10">
+
+      <div class="row">
+        <div class="col-md-6 user">
+          <%= tweet['user_name'].html_safe %>
+          <a href="?f[user_id][]=<%= tweet['user_id'] %>">@<%= tweet['user_id'].html_safe %></a>
+        </div>
+        <div class="col-md-3 date">
+          <%= tweet['date'].html_safe %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-9 text">
+          <%= tweet['tweet_text'].html_safe %>
+          <a href="https://twitter.com/<%= tweet['user_id'] %>/status/<%= tweet['id'] %>">
+            <span class="glyphicon glyphicon-new-window"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <% if tweet['media'] %>
     <div class="row">
-      <div class="col-md-1"></div>
+      <div class="col-md-2 media"></div>
       <% tweet['media'].each do |m| %>
         <div class="col-md-2 well">
           <a href="<%= m %>"><img src="<%= m %>" class="img-responsive"/></a>
