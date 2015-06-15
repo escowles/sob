@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema name="sisot" version="0.1">
+  <uniqueKey>id</uniqueKey>
+  <fields>
+    <field name="id"         type="string"  indexed="true" stored="true" multiValued="false" required="true"/>
+    <field name="date"       type="date"    indexed="true" stored="true" multiValued="false" default="NOW"/>
+    <field name="user_id"    type="string"  indexed="true" stored="true" multiValued="false"/>
+    <field name="user_image" type="string"  indexed="true" stored="true" multiValued="false"/>
+    <field name="user_name"  type="string"  indexed="true" stored="true" multiValued="false"/>
+    <field name="tweet_text" type="text_en" indexed="true" stored="true" multiValued="false"/>
+    <field name="media"      type="string"  indexed="true" stored="true" multiValued="true"/>
+    <field name="tags"       type="string"  indexed="true" stored="true" multiValued="true"/>
+  </fields>
+  <types>
+    <fieldType name="date" class="solr.TrieDateField" precisionStep="0" positionIncrementGap="0"/>
+    <fieldType name="string" class="solr.StrField" sortMissingLast="true" />
+    <fieldType name="text_en" class="solr.TextField" positionIncrementGap="100">
+      <analyzer>
+        <tokenizer class="solr.ICUTokenizerFactory"/>
+        <filter class="solr.ICUFoldingFilterFactory"/>  <!-- NFKC, case folding, diacritics removed -->
+        <filter class="solr.EnglishPossessiveFilterFactory"/>
+        <filter class="solr.EnglishMinimalStemFilterFactory"/>
+        <filter class="solr.TrimFilterFactory"/>
+      </analyzer>
+    </fieldType>
+  </types>
+</schema>
