@@ -35,7 +35,15 @@
       <div class="col-md-2 media"></div>
       <% tweet['media'].each do |m| %>
         <div class="col-md-2 well">
-          <a href="<%= m %>"><img src="<%= m %>" class="img-responsive"/></a>
+          <%
+            if m.include?(' ')
+              p = m.gsub(/ .*/, '')
+              m = m.gsub(/.* /, '')
+            else
+              p = m
+            end
+          %>
+          <a href="<%= m %>"><img src="<%= p %>" class="img-responsive"/></a>
         </div>
       <% end %>
     </div>
